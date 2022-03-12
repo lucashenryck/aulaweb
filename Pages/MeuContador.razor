@@ -1,0 +1,18 @@
+<MudText Typo="Typo.h3" GutterBottom="true">Contador</MudText>
+<MudText Class="mb-4">Valor atual: @Inicial</MudText>
+<MudButton Color="Color.Primary" Variant="Variant.Filled" @onclick="IncrementCount">Aumente o contador!</MudButton>
+
+@code {
+    [Parameter]
+
+    public int Inicial { get; set;}
+
+    [Parameter]
+
+    private int Incremento{ get; set; }
+
+    private void IncrementCount()
+    {
+        Inicial += Incremento;
+    }
+}
