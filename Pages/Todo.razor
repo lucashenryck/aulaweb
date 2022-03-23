@@ -2,32 +2,40 @@
 
 <PageTitle>To-do</PageTitle>
 
-<h1>TO-DO LIST</h1>
+<h1>TO-DO LIST (@todos.Count(todo => !todo.EstaFeito))</h1>
 <p>A seguir, temos uma lista de itens que deverão ser feitos:</p>
 
-<div>
+<div class="mt-8">
     <ul>
         @foreach(var item in todos){
-            <li>@item.Titulo</li>
+            <li>
+                <input type="checkbox" name="" id="" @bind="item.EstaFeito" />
+                @if(item.EstaFeito){
+                    <input @bind="item.Titulo" style="text-decoration:line-through; font-style: italic;"/>
+                }else{
+                    <input @bind="item.Titulo"/>
+
+                }
+            </li>
         }
     </ul>
 </div>
 
-<div>
+<div class="mt-8">
     <input placeholder="Insira um item..." @bind="novoItem"/>
     <MudButton @onclick = "Adicionar" Variant="Variant.Outlined" Size="Size.Small"  Color="Color.Primary" >Adicionar item a lista</MudButton>
 </div>
 
-@code{
+@code {
     private List<TodoItem> todos = new();
 
     private string? novoItem;
-        private void Adicionar() {
-              if(!string.IsNullOrEmpty(novoItem)){
-                  var todo = new TodoItem();
-                  todo.Titulo = novoItem;
-                  todos.Add(todo);
-                  novoItem = string.Empty;
-              }
-        }
+    private void Adicionar() {
+            if(!string.IsNullOrEmpty(novoItem)){
+                var todo = new TodoItem();
+                todo.Titulo = novoItem;
+                todos.Add(todo);
+                novoItem = string.Empty;
+            }
+    }
 }
