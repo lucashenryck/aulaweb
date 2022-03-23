@@ -1,3 +1,33 @@
 @page "/todo"
 
-<h3> Coisas para fazer</h3>"
+<PageTitle>To-do</PageTitle>
+
+<h1>TO-DO LIST</h1>
+<p>A seguir, temos uma lista de itens que deverão ser feitos:</p>
+
+<div>
+    <ul>
+        @foreach(var item in todos){
+            <li>@item.Titulo</li>
+        }
+    </ul>
+</div>
+
+<div>
+    <input placeholder="Insira um item..." @bind="novoItem"/>
+    <MudButton @onclick = "Adicionar" Variant="Variant.Outlined" Size="Size.Small"  Color="Color.Primary" >Adicionar item a lista</MudButton>
+</div>
+
+@code{
+    private List<TodoItem> todos = new();
+
+    private string? novoItem;
+        private void Adicionar() {
+              if(!string.IsNullOrEmpty(novoItem)){
+                  var todo = new TodoItem();
+                  todo.Titulo = novoItem;
+                  todos.Add(todo);
+                  novoItem = string.Empty;
+              }
+        }
+}
