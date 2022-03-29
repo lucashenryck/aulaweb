@@ -2,27 +2,26 @@
 
 <PageTitle>To-do</PageTitle>
 
-<h1>TO-DO LIST (@todos.Count(todo => !todo.EstaFeito))</h1>
-<p>A seguir, temos uma lista de itens que deverão ser feitos:</p>
+<MudText Typo="Typo.h3" GutterBottom="true">TO-DO LIST (@todos.Count(todo => !todo.EstaFeito))</MudText>
+<MudText Class="mb-8">A seguir, temos uma lista de itens que deverão ser feitos:</MudText>
 
 <div class="mt-8">
-    <ul>
+    <MudList>
         @foreach(var item in todos){
-            <li>
-                <input type="checkbox" name="" id="" @bind="item.EstaFeito" />
+            <MudListItem style="d-flex">
+                <MudCheckBox style="float:left" @bind-Checked="@item.EstaFeito" Color="Color.Secondary"></MudCheckBox>
                 @if(item.EstaFeito){
-                    <input @bind="item.Titulo" style="text-decoration:line-through; font-style: italic;"/>
+                    <MudTextField @bind-Value="item.Titulo" Variant="Variant.Outlined" style="text-decoration:line-through; font-style: italic; width:300px"></MudTextField>
                 }else{
-                    <input @bind="item.Titulo"/>
-
+                    <MudTextField @bind-Value="item.Titulo" Variant="Variant.Outlined" style="width:300px"></MudTextField>
                 }
-            </li>
+            </MudListItem>
         }
-    </ul>
+    </MudList>
 </div>
 
-<div class="mt-8">
-    <input placeholder="Insira um item..." @bind="novoItem"/>
+<div class="mt-8" style="width:400px"> 
+    <MudTextField @bind-Value="novoItem" Label="Insira um item..." Variant="Variant.Outlined"></MudTextField>
     <MudButton @onclick = "Adicionar" Variant="Variant.Outlined" Size="Size.Small"  Color="Color.Primary" >Adicionar item a lista</MudButton>
 </div>
 
