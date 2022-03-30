@@ -8,7 +8,7 @@
 <div class="mt-8">
     <MudList>
         @foreach(var item in todos){
-            <MudListItem style="d-flex">
+            <MudListItem class="d-flex">
                 <MudCheckBox style="float:left" @bind-Checked="@item.EstaFeito" Color="Color.Secondary"></MudCheckBox>
                 @if(item.EstaFeito){
                     <MudTextField @bind-Value="item.Titulo" Variant="Variant.Outlined" style="text-decoration:line-through; font-style: italic; width:300px"></MudTextField>

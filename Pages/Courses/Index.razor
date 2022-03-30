@@ -1,0 +1,30 @@
+﻿@page "/course"
+@inject HttpClient Http
+
+
+<PageTitle>Courses</PageTitle>
+
+<MudText Typo="Typo.h3" GutterBottom="true">
+    Todos os cursos
+</MudText>
+
+<MudGrid>
+    
+       
+@foreach(var item in courses)
+{
+    <MudItem lg="4">
+        <CourseItem Id="@item.Id" Title="@item.Name" Body="@item.Description" Image="@item.Image"></CourseItem>
+    </MudItem>
+}
+   
+  
+</MudGrid>
+@code {
+    private Course[]? courses;
+
+    protected override async Task OnInitializedAsync()
+    {
+        courses = await Http.GetFromJsonAsync<Course[]>("sample-data/cursos.json");
+    }
+}
